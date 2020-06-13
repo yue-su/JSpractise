@@ -44,14 +44,13 @@ If it is the case we will return k, if not return -1.
     let arrNum = n.toString().split('');
     let sum = 0;
     let k = 0;
-    let t = 0;
     for (let i = 0; i < arrNum.length; i++) {
         let x = Number(arrNum[i]);
         let y = p + i;
         sum += Math.pow(x, y);
     }
     k = sum / n;
-    if ((k % 1) === 0) {return k} else {return -1} 
+    return k % 1 ? -1 : k; 
   }
 
   console.log(digPow(89, 1));
