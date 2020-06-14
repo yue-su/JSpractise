@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 /*In this kata you are required to, given a string, replace every letter with its position in the alphabet.
 
@@ -67,4 +67,92 @@ createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
   }
   console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
 
-  
+/*The new "Avengers" movie has just been released! There are a lot of people at the cinema box office standing in a huge line. Each of them has a single 100, 50 or 25 dollar bill. An "Avengers" ticket costs 25 dollars.
+
+Vasya is currently working as a clerk. He wants to sell a ticket to every single person in this line.
+
+Can Vasya sell a ticket to every person and give change if he initially has no money and sells the tickets strictly in the order people queue?
+
+Return YES, if Vasya can sell a ticket to every person and give change with the bills he has at hand at that moment. Otherwise return NO.
+
+Examples:
+tickets([25, 25, 50]) // => YES 
+tickets([25, 100]) // => NO. Vasya will not have enough money to give change to 100 dollars
+tickets([25, 25, 50, 50, 100]) // => NO. */
+
+function tickets(peopleInLine){
+    
+    let result = false;
+    for (let i = 0; i < peopleInLine.length; i++) {
+        let peopleArr = [...peopleInLine];
+        let minArr = peopleArr.splice(0, i+1);
+        let x = minArr.reduce((total,currentValue) => {total + currentValue}, 0) - peopleInLine[i];
+        if(peopleInLine[i] = 25){
+            result = true;
+        }else if(peopleInLine[i] - 25 <= (x - 25*i)) {
+            result = true;
+        }else { result = false;}
+  }
+  console.log(result);
+  return result?'NO':'YES';
+}
+console.log(tickets([25, 25, 50, 50, 100]))
+
+/*You are going to be given an array of integers. 
+Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N. If there is no index that would make this happen, return -1.
+*/
+
+
+  function findEvenIndex(arr){
+    let index = 0;
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    for(let i = 0; i < arr.length ; i++){
+      let arrLeft = arr.slice(0, i);
+      let arrRight = arr.slice(i+1, arr.length);
+      let sumLeft = arrLeft.reduce(reducer,0);
+      let sumRight = arrRight.reduce(reducer,0); 
+      if (sumLeft === sumRight){
+            return index = i;
+        } else (index = -1 );
+    }  return index;
+  } 
+console.log(findEvenIndex([1,2,3,4,3,2,1]));
+console.log(findEvenIndex([1,100,50,-51,1,1]));
+console.log(findEvenIndex([1,2,3,4,5,6]));
+
+
+/*
+You are given an array strarr of strings and an integer k. 
+Your task is to return the first longest string consisting of k consecutive strings taken in the array.
+
+Example:
+longest_consec(["zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail"], 2) --> "abigailtheta"
+
+n being the length of the string array, if n = 0 or k > n or k <= 0 return "".
+*/
+
+function longestConsec(strarr, k) {
+    let n = strarr.length;
+    if( n === 0 || k > n || k <= 0){return ""} else {
+    let resultArr = [];
+    for (let i = 0; i < n - k +1; i++) {
+        let subArr ='';
+        for (let j = i; j < k + i ; j++){
+            subArr += strarr[j] 
+        }
+        resultArr.push(subArr)
+    }
+    let numberArr = resultArr.map((items)=>items.length);
+    let maxNumber = 0;
+    for(let i=0; i<numberArr.length; i++) {
+        if(maxNumber < numberArr[i]) {
+            maxNumber = numberArr[i]
+        }
+    }
+    return resultArr[numberArr.indexOf(maxNumber)]
+    } 
+}
+
+
+console.log(longestConsec(["zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail"], 2));
+//console.log(longestConsec(["wlwsasphmxx","owiaxujylentrklctozmymu","wpgozvxxiu"], 2));
