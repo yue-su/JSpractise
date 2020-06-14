@@ -1,3 +1,5 @@
+'use strict';
+
 /*In this kata you are required to, given a string, replace every letter with its position in the alphabet.
 
 If anything in the text isn't a letter, ignore it and don't return it.
@@ -17,9 +19,7 @@ function alphabetPosition(text) {
     }
     return numArr.join(' ');
   }
-
   console.log(alphabetPosition("The sunset sets at twelve o' clock."));
-
 
 /*
 Some numbers have funny properties. For example:
@@ -52,6 +52,19 @@ If it is the case we will return k, if not return -1.
     k = sum / n;
     return k % 1 ? -1 : k; 
   }
-
   console.log(digPow(89, 1));
   console.log(digPow(46288, 3));
+
+  /*
+  Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+
+Example:
+createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) 
+  */
+
+  function createPhoneNumber(numbers){
+    return `(${numbers[0]}${numbers[1]}${numbers[2]}) ${numbers[3]}${numbers[4]}${numbers[5]}-${numbers[6]}${numbers[7]}${numbers[8]}${numbers[9]}`
+  }
+  console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
+
+  
