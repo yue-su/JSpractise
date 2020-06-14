@@ -153,6 +153,56 @@ function longestConsec(strarr, k) {
     } 
 }
 
-
 console.log(longestConsec(["zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail"], 2));
-//console.log(longestConsec(["wlwsasphmxx","owiaxujylentrklctozmymu","wpgozvxxiu"], 2));
+console.log(longestConsec(["wlwsasphmxx","owiaxujylentrklctozmymu","wpgozvxxiu"], 2));
+
+/*
+Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+
+Examples
+pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
+pigIt('Hello world !');     // elloHay orldway !
+*/
+function pigIt(str){
+    let wordArr = str.split(" ");
+    let tempWord =[];
+    for(let i=0; i<wordArr.length; i++) {      
+        if(wordArr[i].length > 1 || wordArr[i].charCodeAt() >= 65)
+        {tempWord[i] = wordArr[i].slice(1, wordArr[i].length) + wordArr[i].charAt(0) + 'ay'}
+        else { tempWord[i] = wordArr[i]}
+    } 
+
+    return tempWord.join(' ');
+}
+
+console.log(pigIt('O Pig latin is cool !'));
+
+/*
+Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+
+Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+
+If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+
+Examples
+"is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+"4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+""  -->  ""
+*/
+
+function order(words){
+    let newArr = words.split(' ');
+    let tempArr = [...newArr];
+    for(let i = 0; i<newArr.length; i++) {
+        let word = newArr[i].split('');
+        let index = 0;
+        for (let j = 0; j<word.length; j++) {
+            if( word[j].charCodeAt() >= 48 && word[j].charCodeAt() <= 57) 
+            {index = Number(word[j]) - 1}
+        }
+        tempArr[index] = newArr[i];
+    }
+    return tempArr.join(' ');
+  }
+
+console.log(order("is2 Thi1s T4est 3a"))
