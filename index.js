@@ -1,4 +1,3 @@
-//'use strict';
 
 /*In this kata you are required to, given a string, replace every letter with its position in the alphabet.
 
@@ -206,3 +205,77 @@ function order(words){
   }
 
 console.log(order("is2 Thi1s T4est 3a"))
+
+
+/* 
+Write Number in Expanded Form
+You will be given a number and you will need to return it as a string in Expanded Form. For example:
+
+expandedForm(12); // Should return '10 + 2'
+expandedForm(42); // Should return '40 + 2'
+expandedForm(70304); // Should return '70000 + 300 + 4'
+*/
+
+function expandedForm(num) {
+    let numArr = num.toString().split('');
+    let resultArr = [];
+    for(let i = 0; i<numArr.length; i++) {
+        if(Number(numArr[i]) !== 0){
+            resultArr.push(Number(numArr[i]) * Math.pow(10, numArr.length - i -1))
+        }
+    }
+    return resultArr.join(' + ');
+  }
+
+console.log(expandedForm(70304));
+
+
+/*
+There is an array with some numbers. All numbers are equal except for one. Try to find it!
+
+findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
+findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
+It’s guaranteed that array contains at least 3 numbers.
+
+The tests contain some very huge arrays, so think about performance.
+*/
+
+function findUniq(arr) {
+   let newArr = arr.sort((a,b)=> a - b);
+   return arr[0]==arr[1]?arr.pop():arr[0];
+}
+console.log(findUniq([ 1, 1, 1, 2, 1, 1 ]));
+
+//best
+/*
+
+only the unique one can pass the find test becasue it's index are first and also last.
+function findUniq(arr) {
+  return arr.find(n => arr.indexOf(n) === arr.lastIndexOf(n));
+}
+*/
+
+/*
+This time no story, no theory. The examples below show you how to write function accum:
+
+Examples:
+
+accum("abcd") -> "A-Bb-Ccc-Dddd"
+accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+accum("cwAt") -> "C-Ww-Aaa-Tttt"
+The parameter of accum is a string which includes only letters from a..z and A..Z.
+*/
+
+function accum(s) {
+	let arr = s.toUpperCase().split('');
+  let arrResult = [];
+  for(let i = 0; i<arr.length; i++) {
+    let lower = '';
+    for(let j = 0; j <= i; j++) {
+    arrResult[i]=(arr[i] + lower)
+    lower = lower + arr[i].toLowerCase()
+    }
+    
+  }
+  return arrResult.join('-')
+}
