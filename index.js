@@ -9,20 +9,28 @@ Should return: 11 (the only odd number)
 Should return: 160 (the only even number)
 */
 
-function findOutlier(integers) {
-    const arr = integers.map((item) => item % 2)
-    const sum = arr.reduce((a, b) => a + b, 0)
-    let index = 0
-    if (sum === 1) {
-        index = arr.indexOf(1)
-    } else {
-        index = arr.indexOf(0)
-    }
-    return integers[index]
+// function findOutlier(integers) {
+//     const arr = integers.map((item) => item % 2)
+//     const sum = arr.reduce((a, b) => a + b, 0)
+//     let index = 0
+//     if (sum === 1) {
+//         index = arr.indexOf(1)
+//     } else {
+//         index = arr.indexOf(0)
+//     }
+//     return integers[index]
+// }
+
+function iqTest(numbers) {
+    let even = numbers.split(' ').filter((item) => Number(item) % 2 === 0)
+    let odd = numbers.split(' ').filter((item) => Number(item) % 2 != 0)
+    return even.length === 1 ? numbers.split(' ').indexOf(even[0]) + 1 : numbers.split(' ').indexOf(odd[0]) + 1
+    
+    // ...
 }
 
 
-findOutlier([2, 4, 0, 100, 4, 11, 2602, 36])
+console.log(iqTest("2 4 6 -8 7 8 10 12 14 16"))
 
 
 /*
@@ -38,5 +46,10 @@ likes ["Alex", "Jacob", "Mark", "Max"] // must be "Alex, Jacob and 2 others like
 */
 
 function likes(names) {
-    
+    const n = names.length
+    if (n === 0) { return `no one likes this` }
+    else if (n === 1) { return `${names[0]} likes this` }
+    else if (n === 2) { return `${names[0]} and ${names[1]} like this` }
+    else if (n === 3) { return `${names[0]}, ${names[1]} and ${names[2]} like this` }
+    else { return `${names[0]}, ${names[1]} and ${names.length - 2} others like this` }
 }
