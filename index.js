@@ -53,3 +53,40 @@ function likes(names) {
     else if (n === 3) { return `${names[0]}, ${names[1]} and ${names[2]} like this` }
     else { return `${names[0]}, ${names[1]} and ${names.length - 2} others like this` }
 }
+
+function songDecoder(song) {
+    // ...
+    let arr = song.replace(/WUB/g, ' ').split(' ')
+    let arr2 =[]
+    for (let i = 0; i < arr.length; i++){
+        if(arr[i] !== "") 
+            arr2.push(arr[i])
+        }
+    return arr2.join(" ")
+}
+
+console.log(songDecoder("AWUBWUBWUBBWUBWUBWUBC"))
+
+
+function arrayDiff(a, b) {
+    for (let i = 0; i < b.length; i++) {
+        a = a.filter((item) => item !== b[i])
+    }
+    return a
+}
+
+console.log(arrayDiff([3, 4, 5, 6, 7], [3, 4]))
+
+var maxSequence = function (arr) {
+    if (arr.filter((e) => e > 0).length === 0 || arr.length === 0) { return 0 }
+    else if (arr.length === 1) { return arr[0] }
+    else {
+        for (let i = 0; i < arr.length; i++) {
+            
+            arr[i] = Math.max(arr[i] + arr[i - 1], arr[i])
+            
+        }
+    }
+    return arr.sort((a, b) => b - a)[0]
+}
+console.log(maxSequence([ -5, -1, -7 ]))
