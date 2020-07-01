@@ -89,4 +89,72 @@ var maxSequence = function (arr) {
     }
     return arr.sort((a, b) => b - a)[0]
 }
-console.log(maxSequence([ -5, -1, -7 ]))
+console.log(maxSequence([-5, -1, -7]))
+
+function humanReadable(seconds) {
+    let hms = [0, 0, 0]
+    hms[0] = Math.floor(seconds / 3600)
+    hms[1] = Math.floor((seconds - hms[0] * 3600) / 60)
+    hms[2] = seconds - hms[0] * 3600 - hms[1] * 60
+    let arr = hms.map((item) => item < 10 ? '0'.concat(item.toString()) : item )
+
+    return `${arr[0]}:${arr[1]}:${arr[2]}`
+}
+
+console.log(humanReadable(10))
+
+function validParentheses(parens) {
+    
+}
+
+console.log(validParentheses("())"))
+
+function formatDuration(seconds) {
+    let hms = [0, 0, 0, 0, 0]
+    hms[0] = Math.floor(seconds / 31536000)
+    hms[1] = Math.floor((seconds - hms[0]*31536000) / 86400) 
+    hms[2] = Math.floor((seconds - hms[0]*31536000 - hms[1]*86400 )/ 3600)
+    hms[3] = Math.floor((seconds - hms[0]*31536000 - hms[1]*86400 - hms[2]*3600) / 60)
+    hms[4] = seconds - hms[0] * 31536000 - hms[1] * 86400 - hms[2] * 3600 - hms[3] * 60
+
+    let hmsStr = []
+    hmsStr[0] = hms[0] > 1 ? hms[0].toString() + ' years' : hms[0].toString() + ' year'
+    hmsStr[1] = hms[1] > 1 ? hms[1].toString() + ' days' : hms[1].toString() + ' day'
+    hmsStr[2] = hms[2] > 1 ? hms[2].toString() + ' hours' : hms[2].toString() + ' hour'
+    hmsStr[3] = hms[3] > 1 ? hms[3].toString() + ' minutes' : hms[3].toString() + ' minute'
+    hmsStr[4] = hms[4] > 1 ? hms[4].toString() + ' seconds' : hms[4].toString() + ' second'
+    
+    let filtered = []
+    for (let i = 0; i < 5; i++) {
+        if (hms[i] !== 0) {
+            filtered.push(hmsStr[i])
+        }
+    }
+
+    switch (filtered.length) {
+        case 0:
+            return `now`
+        case 1:
+            return `${filtered[0]}`
+        case 2:
+            return `${filtered[0]} and ${filtered[1]}`
+        case 3:
+            return `${filtered[0]}, ${filtered[1]} and ${filtered[2]}`
+        case 4:
+            return `${filtered[0]}, ${filtered[1]}, ${filtered[2]} and ${filtered[3]}`
+        case 5:
+            return `${filtered[0]}, ${filtered[1]}, ${filtered[2]}, ${filtered[3]} and ${filtered[4]}`
+    }
+
+    return filtered
+}
+
+console.log(formatDuration(3600))    // returns "1 minute and 2 seconds"
+console.log(formatDuration(366222222))  // returns "1 hour, 1 minute and 2 seconds"
+
+function nextBigger(n) {
+    let arr = n.toString().split('').sort((a, b) => b - a).join('')
+    return arr
+}
+
+console.log(nextBigger(2017))
